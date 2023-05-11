@@ -1,8 +1,7 @@
 steps:
+#- name: 'gcr.io/cloud-builders/docker'
+#  args: ['build', '-t', 'gcr.io/cloud-run-011/cloudrun:$COMMIT_SHA', '.']
+#- name: 'gcr.io/cloud-builders/docker'
+#  args: ['push', 'gcr.io/cloud-run-011/cloudrun:$COMMIT_SHA']
 - name: 'gcr.io/cloud-builders/gcloud'
-  entrypoint: 'bash'
-  args:
-  - '-c'
-  - |
-    gcloud app deploy app.yaml --quiet
-    gcloud app deploy index.php --quiet
+  args: ['beta', 'run', 'deploy', 'engine', '--region=us-central1', '--platform=managed', '--image=gcr.io/app-engine-011/engine:$COMMIT_SHA']
